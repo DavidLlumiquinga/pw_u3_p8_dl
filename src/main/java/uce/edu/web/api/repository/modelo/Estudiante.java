@@ -27,7 +27,7 @@ public class Estudiante {
     @Column(name = "estu_fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
-    //Set y get
+
     public Integer getId() {
         return id;
     }

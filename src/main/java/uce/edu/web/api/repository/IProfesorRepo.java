@@ -7,4 +7,8 @@ public interface IProfesorRepo {
 
     public Profesor selecionarPorId(Integer id);
     public List<Profesor> selecionarTodos();
+        public void actualizarPorId(Profesor profesor);
+    public void actualizarParcialPorId(Profesor profesor);
+    public void borrarPorId(Integer id);
+    public void insertar(Profesor profesor);
 }

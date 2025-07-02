@@ -27,6 +27,8 @@ public class Estudiante {
     @Column(name = "estu_fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
+    @Column(name = "estu_genero")
+    private String genero;
 
     public Integer getId() {
         return id;
@@ -60,5 +62,11 @@ public class Estudiante {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
     
 }

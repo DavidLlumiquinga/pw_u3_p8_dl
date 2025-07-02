@@ -2,6 +2,7 @@ package uce.edu.web.api.controller;
 
 import java.util.List;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import jakarta.inject.Inject;
@@ -12,6 +13,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 import uce.edu.web.api.repository.modelo.Estudiante;
 import uce.edu.web.api.service.IEstudianteService;
 
@@ -27,14 +29,17 @@ public class EstudianteController {
         return this.estudianteService.buscarPorId(id); 
     }
 
+    //?genero=M&provincia=Pichincha
     @GET
     @Path("")
-    public List<Estudiante> consultarTodos() {
-        return this.estudianteService.buscarTodos();
+    public List<Estudiante> consultarTodos(@QueryParam("genero") String genero, 
+                                           @QueryParam("provincia") String provincia) {
+        return this.estudianteService.buscarTodos(genero);
     }
 
     @POST
     @Path("")
+    @Operation(summary = "Guardar estudiantes",description = "Esta capacidad permite guardar un estudiante")
     //Puede tener o no tener el @RequestBody
     public void guardar(@RequestBody Estudiante estudiante) {
         this.estudianteService.guardar(estudiante);

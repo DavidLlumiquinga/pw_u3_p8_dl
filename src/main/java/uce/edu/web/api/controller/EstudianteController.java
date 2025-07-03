@@ -48,23 +48,25 @@ public class EstudianteController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Guardar estudiantes",description = "Esta capacidad permite guardar un estudiante")
     //Puede tener o no tener el @RequestBody
-    public void guardar(@RequestBody Estudiante estudiante) {
-        this.estudianteService.guardar(estudiante);
-        
+
+     public Response guardar(Estudiante estudiante) {
+        estudianteService.guardar(estudiante);
+        return Response.status(Response.Status.CREATED).build();
     }
 
     @PUT
     @Path("/{id}")
-        @Consumes(MediaType.APPLICATION_JSON)
-    public void actualizar(@PathParam("id") Integer id, @RequestBody Estudiante estudiante) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response actualizar(@PathParam("id") Integer id, @RequestBody Estudiante estudiante) {
         estudiante.setId(id);
-        this.estudianteService.actualizarPorId(estudiante);
+        this.estudianteService.actualizarParcialPorId(estudiante); 
+        return Response.status(Response.Status.OK).build();
     }
 
     @PATCH
     @Path("/{id}")
-        @Consumes(MediaType.APPLICATION_JSON)
-    public void actualizarParcialPorId(@PathParam("id") Integer id, @RequestBody Estudiante estudiante) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response actualizarParcialPorId(@PathParam("id") Integer id, @RequestBody Estudiante estudiante) {
         estudiante.setId(id);
         Estudiante e=this.estudianteService.buscarPorId(id);
         if(estudiante.getNombre() != null) {
@@ -78,12 +80,14 @@ public class EstudianteController {
         }
 
         this.estudianteService.actualizarParcialPorId(e);
+        return Response.status(Response.Status.OK).build();
     }
 
     @DELETE
     @Path("/{id}")
         @Consumes(MediaType.APPLICATION_JSON)
-    public void borrarPorId(@PathParam("id") Integer id) {
+    public Response borrarPorId(@PathParam("id") Integer id) {
         this.estudianteService.borrarPorId(id);
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }

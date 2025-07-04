@@ -6,7 +6,7 @@ import uce.edu.web.api.repository.modelo.Profesor;
 public interface IProfesorRepo {
 
     public Profesor selecionarPorId(Integer id);
-    public List<Profesor> selecionarTodos();
+    public List<Profesor> selecionarTodos(String asignatura);
         public void actualizarPorId(Profesor profesor);
     public void actualizarParcialPorId(Profesor profesor);
     public void borrarPorId(Integer id);

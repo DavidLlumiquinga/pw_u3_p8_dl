@@ -9,43 +9,41 @@ import uce.edu.web.api.repository.IEstudianteRepo;
 import uce.edu.web.api.repository.modelo.Estudiante;
 import uce.edu.web.api.service.to.EstudianteTo;
 
-
 @ApplicationScoped
 public class EstudianteServiceImpl implements IEstudianteService {
 
-    @Inject
+  @Inject
     private IEstudianteRepo estudianteRepo;
-
+ 
     @Override
-    public EstudianteTo buscarPorId(Integer id, UriInfo uriInfo) {
-        Estudiante e1=this.estudianteRepo.selecionarPorId(id);
-        EstudianteTo e=new EstudianteTo(e1.getId(), e1.getNombre(), e1.getApellido(), e1.getGenero(), e1.getFechaNacimiento().toString(), uriInfo);
-        return e;
+    public Estudiante buscarPorId(Integer id) {
+        return this.estudianteRepo.selecionarPorId(id);
     }
-
+ 
     @Override
     public List<Estudiante> buscarTodos(String genero) {
         return this.estudianteRepo.selecionarTodos(genero);
     }
-
+ 
     @Override
     public void actualizarPorId(Estudiante estudiante) {
         this.estudianteRepo.actualizarPorId(estudiante);
     }
-
+ 
     @Override
     public void actualizarParcialPorId(Estudiante estudiante) {
         this.estudianteRepo.actualizarParcialPorId(estudiante);
     }
-
+ 
     @Override
     public void borrarPorId(Integer id) {
         this.estudianteRepo.borrarPorId(id);
     }
-
+ 
     @Override
     public void guardar(Estudiante estudiante) {
         this.estudianteRepo.insertar(estudiante);
     }
+   
 
 }

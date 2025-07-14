@@ -1,36 +1,45 @@
 package uce.edu.web.api.repository.modelo;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
 
 
 @Entity
 @Table(name = "estudiante")
 public class Estudiante {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "estu_id")
     private Integer id;
-
+    
     @Column(name = "estu_nombre")
     private String nombre;
     
     @Column(name = "estu_apellido")
     private String apellido;
     
+
     @Column(name = "estu_fecha_nacimiento")
-    private LocalDate fechaNacimiento;
+    private LocalDateTime fechaNacimiento;
 
     @Column(name = "estu_genero")
     private String genero;
 
+    @OneToMany(mappedBy = "estudiante")
+    private List<Hijo> hijos;
+
+  //SET AND GET
     public Integer getId() {
         return id;
     }
@@ -55,19 +64,27 @@ public class Estudiante {
         this.apellido = apellido;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public LocalDateTime getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getGenero() {
         return genero;
     }
+
     public void setGenero(String genero) {
         this.genero = genero;
     }
-    
+
+    public List<Hijo> getHijos() {
+    return hijos;
+}
+
+public void setHijos(List<Hijo> hijos) {
+    this.hijos = hijos;
+}
 }

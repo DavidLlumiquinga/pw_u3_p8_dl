@@ -113,10 +113,8 @@ public class EstudianteController {
     public Response actualizarParcialPorId(@PathParam("id") Integer id, @RequestBody EstudianteTo estudianteTo, @Context UriInfo uriInfo) {
         estudianteTo.setId(id);
         
-        // Obtener el estudiante existente
         Estudiante estudianteExistente = this.estudianteService.buscarPorId(id);
         
-        // Mapear los cambios del TO a la entidad existente
         if (estudianteTo.getNombre() != null) {
             estudianteExistente.setNombre(estudianteTo.getNombre());
         }
@@ -153,10 +151,6 @@ public class EstudianteController {
     @GET
     @Path("/{id}/hijos")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-        summary = "obtener hijos del estudiante",
-        description = "esta capacidad permite obtener todos los hijos de un estudiante específico"
-    )
     public Response obtenerHijosPorId(@PathParam("id") Integer id){
         List<Hijo> hijos = this.hijoService.buscarPorId(id);
         return Response.status(Response.Status.OK).entity(hijos).build();
